@@ -126,6 +126,26 @@ void loadTasks(vector<Task>& tasks, int& nextId) {
 
     file.close();
 }
+void viewPendingTask(const vector<Task>& tasks) {
+    bool found = false;
+
+    cout << "\n=== PENDING TASKS ===\n";
+
+    for (const Task& t : tasks) {
+        if (!t.completed) {
+            cout << "\nTask ID: " << t.id << endl;
+            cout << "Title: " << t.title << endl;
+            cout << "Subject: " << t.subject << endl;
+            cout << "Deadline: " << t.deadline << endl;
+            cout << "Status: Pending" << endl;
+            found = true;
+        }
+    }
+
+    if (!found) {
+        cout << "No pending tasks!\n";
+    }
+}
 
 int main() {
     vector<Task> tasks;
@@ -139,7 +159,8 @@ int main() {
         cout << "2. View Tasks\n";
         cout << "3. Delete Task\n";
         cout << "4. Mark Task Completed\n";
-        cout << "5.  Exit\n";
+        cout << "5. View Pending Tasks\n";
+        cout << "6.  Exit\n";
         cout << "Enter choice: ";
         cin >> choice;
 
@@ -155,18 +176,21 @@ int main() {
             case 3:
                  deleteTask(tasks);
                  break;
-             case 4:
+            case 4:
                   completeTask(tasks);
                   break;
-             case 5:
-                cout << "Goodbye!\n";
-                break;
+            case 5:
+                  viewPendingTask(tasks);
+                  break;
+             case 6:
+                  cout << "Goodbye!\n";
+                  break;
                      
             default:
                 cout << "Invalid choice!\n";
         }
 
-    } while (choice != 5);
+    } while (choice != 6);
 
     return 0;
 }
